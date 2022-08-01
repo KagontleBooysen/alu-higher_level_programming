@@ -12,4 +12,4 @@ if __name__ == "__main__":
     if r.status_code >= 400:
         print('None')
     else:
-        print(r.json().get('id'))]
+        print(r.json().get('id'))
