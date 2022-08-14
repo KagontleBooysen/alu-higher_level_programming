@@ -574,7 +574,7 @@ class TestSquare_update_kwargs(unittest.TestCase):
     def test_update_kwargs_None_id_and_more(self):
         s = Square(10, 10, 10, 10)
         s.update(id=None, size=7, x=18)
-        correct = "[Square] ({}) 18/10 - 7".format(s.id)
+        correct = "[Square] (None) 18/10 - 7"
         self.assertEqual(correct, str(s))
 
     def test_update_kwargs_twice(self):
@@ -652,6 +652,7 @@ class TestSquare_to_dictionary(unittest.TestCase):
         s = Square(10, 10, 10, 10)
         with self.assertRaises(TypeError):
             s.to_dictionary(1)
+
 
 if __name__ == "__main__":
     unittest.main()
