@@ -19,4 +19,5 @@ if __name__ == '__main__':
     except Exception:
         pass
     session.commit()
+    print(state.id)
     session.close()
