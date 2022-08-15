@@ -12,12 +12,9 @@ if __name__ == '__main__':
                            pool_pre_ping=True)
     Base.metadata.create_all(engine)
     Sessionmaker = sessionmaker(bind=engine)
-    session = Sessionmaker()
-    new_mex = session.query(State).filter_by(id=2).first()
-    try:
-        new_mex.name = "New Mexico"
-    except Exception:
-        pass
+    session = Session()
+    state = State(name="Texas")
+    session.add(state)
     session.commit()
     print(state.id)
     session.close()
