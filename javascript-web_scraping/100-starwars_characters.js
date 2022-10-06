@@ -1,27 +1,17 @@
-#!/usr/bin/node
+!/usr/bin/node
+
 const request = require('request');
-const film = process.argv[2];
-let url = 'http://swapi.co/api/people/';
-function filmcharacters (film, url) {
-  request(url, function (err, response, body) {
-    if (err) {
-      console.log(err);
-    } else if (response.statusCode === 200) {
-      let jsonobj = JSON.parse(body);
-      let people = jsonobj.results;
-      for (let i in people) {
-        for (let j in people[i].films) {
-          if (people[i].films[j].includes(film)) {
-            console.log(people[i].name);
-          }
-        }
+
+request('http://swapi.co/api/films/' + process.argv[2], function (error, response, body) {
+  if (error) {
+    console.error(error);
+  }
+  JSON.parse(body).characters.forEach(function (url, callback) {
+    request(url, function (error, response, body) {
+      if (error) {
+        console.error(error);
       }
-      if (jsonobj.next !== null) {
-        filmcharacters(film, jsonobj.next);
-      }
-    } else {
-      console.log('An error occured. Status code: ' + response.statusCode);
-    }
+      console.log(JSON.parse(body).name);
+    });
   });
-}
-filmcharacters(film, url);
+});;
